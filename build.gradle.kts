@@ -42,7 +42,7 @@ publishing {
             pom {
                 name.set(project.name)
                 description.set(project.description)
-                url.set("https://github.com/cloudflightio/structurizr-export-plantuml")
+                url.set("https://github.com/cloudflightio/structurizr-export-c4plantuml")
                 licenses {
                     license {
                         name.set("The Apache License, Version 2.0")
@@ -62,9 +62,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection.set("scm:ggit@github.com:cloudflightio/structurizr-export-plantuml.git")
-                    developerConnection.set("scm:git@github.com:cloudflightio/structurizr-export-plantuml.git")
-                    url.set("https://github.com/cloudflightio/structurizr-export-plantuml")
+                    connection.set("scm:ggit@github.com:cloudflightio/structurizr-export-c4plantuml.git")
+                    developerConnection.set("scm:git@github.com:cloudflightio/structurizr-export-c4plantuml.git")
+                    url.set("https://github.com/cloudflightio/structurizr-export-c4plantuml")
                 }
             }
         }
