@@ -54,9 +54,47 @@ relationship.addTags(CRITICAL);
 ContainerView view = workspace.getViews().createContainerView(softwareSystem, "containerView", "");
 view.addDefaultElements();
 
+// use the ExtendedC4PlantUmlExporter instead of the default C4PlantUmlExporter
 Diagram diagram = new ExtendedC4PlantUmlExporter().export(view);
 ````
 
-and this will create the following diagram:
+and this will create the following PlantUML diagram:
+
+````puml
+@startuml
+title SoftwareSystem - Containers
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+AddElementTag("Container", $bgColor="#efefef")
+AddElementTag("server", $bgColor="#00ff00", $fontColor="#ff00ff")
+AddElementTag("db", $bgColor="#ff00ff", $fontColor="#00ff00")
+AddRelTag("critical", $lineColor="#ff0000", $textColor="#ff0000", $lineStyle=DottedLine())
+System_Boundary("SoftwareSystem_boundary", "SoftwareSystem") {
+  WithoutPropertyHeader()
+  AddProperty("IP","127.0.0.1")
+  AddProperty("Region","East")
+  Container(SoftwareSystem.Container1, "Container 1", "", $tags="server+Container+Element")
+  WithoutPropertyHeader()
+  AddProperty("IP","127.0.0.2")
+  AddProperty("Region","West")
+  ContainerDb(SoftwareSystem.Container2, "Container 2", "", $tags="db+Container+Element")
+}
+
+WithoutPropertyHeader()
+AddProperty("Prop1","Value1")
+AddProperty("Prop2","Value2")
+Rel_D(SoftwareSystem.Container1, SoftwareSystem.Container2, "fetches data", $tags="critical+Relationship")
+
+SHOW_LEGEND()
+@enduml
+````
+
+which can be rendered to this image using PlantUML:
 
 ![Full Example](/fullExample.png)
