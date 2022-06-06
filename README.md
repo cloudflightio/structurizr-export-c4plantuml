@@ -59,4 +59,4 @@ Diagram diagram = new ExtendedC4PlantUmlExporter().export(view);
 
 and this will create the following diagram:
 
-!(/fullExample.png)
+![Full Example](/fullExample.png)
