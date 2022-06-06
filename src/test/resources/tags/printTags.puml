@@ -1,0 +1,23 @@
+@startuml
+title SoftwareSystem - Containers
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+AddElementTag("Container", $bgColor="#efefef")
+AddElementTag("server", $bgColor="#00ff00", $fontColor="#ff00ff")
+AddElementTag("db", $bgColor="#ff00ff", $fontColor="#00ff00")
+AddRelTag("critical", $lineColor="#ff0000", $textColor="#ff0000", $lineStyle=DottedLine())
+System_Boundary("SoftwareSystem_boundary", "SoftwareSystem") {
+  Container(SoftwareSystem.WebServer, "WebServer", "Spring Boot", "my web server", $tags="server+Container+Element")
+  ContainerDb(SoftwareSystem.Database, "Database", "MariaDB", "my database", $tags="db+Container+Element")
+}
+
+Rel_D(SoftwareSystem.WebServer, SoftwareSystem.Database, "fetches data", "JDBC", $tags="critical+Relationship")
+
+SHOW_LEGEND()
+@enduml

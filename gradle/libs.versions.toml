@@ -1,0 +1,14 @@
+[versions]
+assertj = "3.23.1"
+junit = "5.8.2"
+
+structurizr = "1.12.2"
+structurizr-export = "1.5.0"
+
+[libraries]
+assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+
+structurizr-export = { module = "com.structurizr:structurizr-export", version.ref = "structurizr-export" }
+structurizr-core = { module = "com.structurizr:structurizr-core", version.ref = "structurizr" }
+
