@@ -13,7 +13,18 @@ adds new functionality, specifically:
 
 ## Usage
 
-Add the library [io.cloudflight.structurizr:structurizr-export-c4plantuml](https://search.maven.org/artifact/io.cloudflight.structurizr/structurizr-export-c4plantuml) to your classpath first.
+Add the library [io.cloudflight.structurizr:structurizr-export-c4plantuml](https://search.maven.org/artifact/io.cloudflight.structurizr/structurizr-export-c4plantuml) to your classpath first, 
+i.e. with Gradle:
+
+````groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.cloudflight.structurizr:structurizr-export-c4plantuml:1.0.0")
+}
+````
 
 The following code makes use of tags and properties:
 
