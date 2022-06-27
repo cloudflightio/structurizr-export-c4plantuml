@@ -29,6 +29,8 @@ dependencies {
     api(libs.structurizr.core)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj)
+    testImplementation(libs.architectureicons)
+    testImplementation(libs.structurizr.client)
 }
 
 java {

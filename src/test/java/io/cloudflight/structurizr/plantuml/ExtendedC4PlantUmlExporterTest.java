@@ -3,18 +3,17 @@ package io.cloudflight.structurizr.plantuml;
 import com.structurizr.Workspace;
 import com.structurizr.export.AbstractDiagramExporter;
 import com.structurizr.export.Diagram;
-import com.structurizr.export.plantuml.C4PlantUMLExporter;
 import com.structurizr.model.Container;
 import com.structurizr.model.Relationship;
 import com.structurizr.model.SoftwareSystem;
 import com.structurizr.model.Tags;
 import com.structurizr.view.*;
+import io.cloudflight.architectureicons.tupadr3.DevIcons2;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExtendedC4PlantUmlExporterTest {
 
@@ -119,5 +118,28 @@ class ExtendedC4PlantUmlExporterTest {
         Diagram diagram = new ExtendedC4PlantUmlExporter().export(view);
 
         assertThat(new File("./src/test/resources/tags/fullExample.puml")).hasContent(diagram.getDefinition());
+    }
+
+    @Test
+    void icons() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+
+        // activate property and tag printing
+        Configuration configuration = workspace.getViews().getConfiguration();
+        configuration.addProperty(ExtendedC4PlantUmlExporter.PLANTUML_ADD_PROPERTIES_PROPERTY, Boolean.TRUE.toString());
+        configuration.addProperty(ExtendedC4PlantUmlExporter.PLANTUML_ADD_TAGS_PROPERTY, Boolean.TRUE.toString());
+
+        configuration.addTheme(DevIcons2.STRUCTURIZR_THEME_URL);
+
+        SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("My SoftwareSystem");
+        softwareSystem.addTags(DevIcons2.ANGULARJS.getName());
+
+        ThemeUtils.loadThemes(workspace);
+
+        SystemLandscapeView landscape = workspace.getViews().createSystemLandscapeView("landscape", "");
+        landscape.addAllSoftwareSystems();
+
+        Diagram diagram = new ExtendedC4PlantUmlExporter().export(landscape);
+        System.out.println(diagram.getDefinition());
     }
 }

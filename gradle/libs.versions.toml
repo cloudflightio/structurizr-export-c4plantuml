@@ -11,4 +11,6 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref
 
 structurizr-export = { module = "com.structurizr:structurizr-export", version.ref = "structurizr-export" }
 structurizr-core = { module = "com.structurizr:structurizr-core", version.ref = "structurizr" }
+structurizr-client = { module = "com.structurizr:structurizr-client", version.ref = "structurizr" }
 
+architectureicons= {module="io.cloudflight.architectureicons:architectureicons", version="0.3.0"}

@@ -1,0 +1,15 @@
+@startuml
+title System Landscape
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+AddElementTag("angularjs", $sprite="img:https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2/angularjs.png")
+System(MySoftwareSystem, "My SoftwareSystem", "", $tags="angularjs+Software System+Element")
+
+
+SHOW_LEGEND()
+@enduml

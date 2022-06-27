@@ -109,3 +109,54 @@ SHOW_LEGEND()
 which can be rendered to this image using PlantUML:
 
 ![Full Example](/fullExample.png)
+
+## Add Icons
+
+In the combination with the [Architecture Icons library](https://github.com/cloudflightio/architecture-icons) you can also easily
+add icons to your files:
+
+````java
+ Workspace workspace = new Workspace("Name", "Description");
+
+// activate property and tag printing
+Configuration configuration = workspace.getViews().getConfiguration();
+configuration.addProperty(ExtendedC4PlantUmlExporter.PLANTUML_ADD_PROPERTIES_PROPERTY, Boolean.TRUE.toString());
+configuration.addProperty(ExtendedC4PlantUmlExporter.PLANTUML_ADD_TAGS_PROPERTY, Boolean.TRUE.toString());
+
+configuration.addTheme(DevIcons2.STRUCTURIZR_THEME_URL);
+
+SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("My SoftwareSystem");
+softwareSystem.addTags(DevIcons2.ANGULARJS.getName());
+
+ThemeUtils.loadThemes(workspace);
+
+SystemLandscapeView landscape = workspace.getViews().createSystemLandscapeView("landscape", "");
+landscape.addAllSoftwareSystems();
+
+Diagram diagram = new ExtendedC4PlantUmlExporter().export(landscape);
+System.out.println(diagram.getDefinition());
+````
+
+This will render the following file:
+
+````puml
+@startuml
+title System Landscape
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+AddElementTag("angularjs", $sprite="img:https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2/angularjs.png")
+System(MySoftwareSystem, "My SoftwareSystem", "", $tags="angularjs+Software System+Element")
+
+
+SHOW_LEGEND()
+@enduml
+````
+
+which renders to the following image:
+
+![Icon Example](/iconExample.png)
