@@ -21,11 +21,8 @@ repositories {
 }
 
 dependencies {
-    api(libs.structurizr.export)  {
-        // TODO remove when https://github.com/structurizr/export/pull/9 is merged and released
-        exclude(module = "structurizr-client")
-    }
-    // TODO remove when https://github.com/structurizr/export/pull/9 is merged and released
+    api(libs.google.findbugs)
+    api(libs.structurizr.export)
     api(libs.structurizr.core)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj)
