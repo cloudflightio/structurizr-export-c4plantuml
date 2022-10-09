@@ -2,15 +2,19 @@
 assertj = "3.23.1"
 junit = "5.8.2"
 
-structurizr = "1.12.2"
-structurizr-export = "1.5.0"
+structurizr = "1.15.2"
+structurizr-export = "1.7.0"
+
+findbugs = "3.0.2"
 
 [libraries]
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 
 structurizr-export = { module = "com.structurizr:structurizr-export", version.ref = "structurizr-export" }
-structurizr-core = { module = "com.structurizr:structurizr-core", version.ref = "structurizr" }
+structurizr-core = { module = "com.structurizr:structurizr-client", version.ref = "structurizr" }
 structurizr-client = { module = "com.structurizr:structurizr-client", version.ref = "structurizr" }
+
+google-findbugs = { module = "com.google.code.findbugs:jsr305", version.ref = "findbugs" }
 
 architectureicons= {module="io.cloudflight.architectureicons:architectureicons", version="0.3.0"}

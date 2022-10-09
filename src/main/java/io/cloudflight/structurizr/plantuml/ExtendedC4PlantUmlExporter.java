@@ -41,31 +41,33 @@ public class ExtendedC4PlantUmlExporter extends PatchedC4PlantUMLExporter {
                 .flatMap(elementView -> elementView.getElement().getTagsAsSet().stream())
                 .distinct().forEach(tag -> {
                             ElementStyle style = view.getViewSet().getConfiguration().getStyles().findElementStyle(tag);
-                            Map<String, String> attributes = new LinkedHashMap<>();
-                            if (!isNullOrEmpty(style.getBackground())) {
-                                attributes.put("$bgColor", quote(style.getBackground()));
-                            }
-                            if (!isNullOrEmpty(style.getColor())) {
-                                attributes.put("$fontColor", quote(style.getColor()));
-                            }
-                            if (!isNullOrEmpty(style.getStroke())) {
-                                attributes.put("$borderColor", quote(style.getStroke()));
-                            }
-                            if (style.getShape() == Shape.RoundedBox) {
-                                attributes.put("$shape", "RoundedBoxShape()");
-                            }
-                            if (!isNullOrEmpty(style.getIcon())) {
-                                attributes.put("$sprite", quote("img:" + style.getIcon()));
-                            }
-                            if (!attributes.isEmpty()) {
-                                writer.writeLine(format("AddElementTag(\"%s\", %s)", tag, mapToString(attributes)));
-                            }
-                            if (!isNullOrEmpty(style.getBackground()) && !isNullOrEmpty(style.getColor())) {
-                                if (Tags.PERSON.equals(tag) || Tags.COMPONENT.equals(tag) || Tags.CONTAINER.equals(tag)) {
-                                    // if background and color is set, and this is the element style of one of the default tags
-                                    // when we can call UpdateElementStyle with the lowercase (i.e. UpdateElementStyle("person")) in
-                                    // order to remove this line from the legend
-                                    writer.writeLine(format("UpdateElementStyle(\"%s\")", tag.toLowerCase()));
+                            if (style != null) {
+                                Map<String, String> attributes = new LinkedHashMap<>();
+                                if (!isNullOrEmpty(style.getBackground())) {
+                                    attributes.put("$bgColor", quote(style.getBackground()));
+                                }
+                                if (!isNullOrEmpty(style.getColor())) {
+                                    attributes.put("$fontColor", quote(style.getColor()));
+                                }
+                                if (!isNullOrEmpty(style.getStroke())) {
+                                    attributes.put("$borderColor", quote(style.getStroke()));
+                                }
+                                if (style.getShape() == Shape.RoundedBox) {
+                                    attributes.put("$shape", "RoundedBoxShape()");
+                                }
+                                if (!isNullOrEmpty(style.getIcon())) {
+                                    attributes.put("$sprite", quote("img:" + style.getIcon()));
+                                }
+                                if (!attributes.isEmpty()) {
+                                    writer.writeLine(format("AddElementTag(\"%s\", %s)", tag, mapToString(attributes)));
+                                }
+                                if (!isNullOrEmpty(style.getBackground()) && !isNullOrEmpty(style.getColor())) {
+                                    if (Tags.PERSON.equals(tag) || Tags.COMPONENT.equals(tag) || Tags.CONTAINER.equals(tag)) {
+                                        // if background and color is set, and this is the element style of one of the default tags
+                                        // when we can call UpdateElementStyle with the lowercase (i.e. UpdateElementStyle("person")) in
+                                        // order to remove this line from the legend
+                                        writer.writeLine(format("UpdateElementStyle(\"%s\")", tag.toLowerCase()));
+                                    }
                                 }
                             }
                         }
@@ -74,18 +76,20 @@ public class ExtendedC4PlantUmlExporter extends PatchedC4PlantUMLExporter {
                 .flatMap(relationshipView -> relationshipView.getRelationship().getTagsAsSet().stream())
                 .distinct().forEach(tag -> {
                             RelationshipStyle style = view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(tag);
-                            Map<String, String> attributes = new LinkedHashMap<>();
-                            if (!isNullOrEmpty(style.getColor())) {
-                                attributes.put("$lineColor", quote(style.getColor()));
-                                attributes.put("$textColor", quote(style.getColor()));
-                            }
-                            if (style.getStyle() == LineStyle.Dashed) {
-                                attributes.put("$lineStyle", "DashedLine()");
-                            } else if (style.getStyle() == LineStyle.Dotted) {
-                                attributes.put("$lineStyle", "DottedLine()");
-                            }
-                            if (!attributes.isEmpty()) {
-                                writer.writeLine(format("AddRelTag(\"%s\", %s)", tag, mapToString(attributes)));
+                            if (style != null) {
+                                Map<String, String> attributes = new LinkedHashMap<>();
+                                if (!isNullOrEmpty(style.getColor())) {
+                                    attributes.put("$lineColor", quote(style.getColor()));
+                                    attributes.put("$textColor", quote(style.getColor()));
+                                }
+                                if (style.getStyle() == LineStyle.Dashed) {
+                                    attributes.put("$lineStyle", "DashedLine()");
+                                } else if (style.getStyle() == LineStyle.Dotted) {
+                                    attributes.put("$lineStyle", "DottedLine()");
+                                }
+                                if (!attributes.isEmpty()) {
+                                    writer.writeLine(format("AddRelTag(\"%s\", %s)", tag, mapToString(attributes)));
+                                }
                             }
                         }
                 );
